@@ -1,0 +1,16 @@
+---
+- name: "Install NFS server"
+  apt: name=nfs-kernel-server
+
+- name: "Create export dir"
+  file: dest={{item.dir}} state=directory mode=0777
+  with_items:
+    - { dir: "/service" }
+
+- name: "Setting export"
+  lineinfile: dest=/etc/exports line='{{item.dir}} {{item.network}}(rw,sync,no_subtree_check,fsid=0,no_root_squash)'
+  with_items:
+    - { dir: "/service", network: "*" }
+  notify:
+    - restart nfs-server
+

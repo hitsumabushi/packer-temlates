@@ -1,0 +1,9 @@
+[chi-nfs-servers]
+nfs-server ansible_connection=local
+
+[chi:children]
+chi-nfs-servers
+
+[nfs-servers:children]
+chi-nfs-servers
+

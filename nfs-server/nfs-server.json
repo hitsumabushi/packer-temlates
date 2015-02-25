@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "proxy": ""
+  },
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/proxy.sh",
+        "scripts/ansible_setup.sh"
+      ],
+      "environment_vars": [ "PROXY={{user `proxy`}}" ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "playbooks/site.yml",
+      "inventory_file": "playbooks/hosts",
+      "role_paths": ["playbooks/roles/nfs-server"]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/cleanup.sh"
+      ]
+    }
+  ],
+  "builders": [
+    {
+      "type": "docker",
+      "image": "ubuntu:14.04",
+      "export_path": "image.tar",
+      "pull": false
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "docker-import",
+      "repository": "hitsumabushi/nfs-kernel-server",
+      "tag": "0.1"
+    }
+  ]
+}
+
