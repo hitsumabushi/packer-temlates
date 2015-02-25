@@ -2,13 +2,23 @@
 
 [Packer](https://www.packer.io/) templates with ESXi.
 
-## Specification
+## templates
+
+- debian-wheezy
+  - Details are bellow
+- NFS server (Ubuntu 14.04)
+  - Docker image
+  - exports /service dir
+
+## debian-wheezy
+
+### Specification
 
 1. VM has 2 vNIC
 2. Get IP address from DHCP servers
 3. VMware tools / open-vm-tools is installed
 
-## Pre-Requirements
+### Pre-Requirements
 
 1. ESXi Settings : Following 3 setting needed
   - Enable SSH
@@ -23,9 +33,9 @@
 2. [Install Packer](https://www.packer.io/downloads.html)
 3. (If you want to use VMware tools,) download VMwareTools-\*.tar.gz and put to debian-wheezy/uploads/VMwareTools-\*.tar.gz
 
-## Parameters
+### Parameters
 
-### Requiered
+#### Requiered
 
 | variable               | mean                       |
 |------------------------|----------------------------|
@@ -34,7 +44,7 @@
 | ethernet0.networkName  | Portgroup name of 1st vNIC |
 | ethernet1.networkName  | Portgroup name of 2nd vNIC |
 
-### Optional
+#### Optional
 
 Explain important variables below.
 See each templates file for getting all variables.
@@ -48,14 +58,14 @@ See each templates file for getting all variables.
 | iso\_url               | snip.              | Debian net install image URL                      |
 | iso\_md5               | snip.              | md5sum of ISO file                                |
 
-## Limitation
+### Limitation
 Now, default user&password are root/password.
 If you want change them directory, you must modify preseed file and add packer build parameter.
 It's very confusing.
 
 So, please use provisioning for change them.
 
-## Build Example
+### Build Example
 
 ```shell
 # Install vmware-tools
