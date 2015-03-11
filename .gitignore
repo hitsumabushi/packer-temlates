@@ -42,5 +42,6 @@ vendor
 
 packer_cache/
 */uploads/VMwareTools-*.tar.gz
+log
 
 

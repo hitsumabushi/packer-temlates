@@ -1,0 +1,1 @@
+PACKER_LOG_PATH=./log PACKER_LOG=1 packer build -var 'ethernet0.networkName=VM Network' -var 'ethernet1.networkName=VM Network 2' -var 'remote_password=vmesxserver' -var 'remote_host=192.168.193.10' ubuntu-trusty.json
